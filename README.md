@@ -1,3 +1,3 @@
-# Ionboost
+# Ionthruster
 
-Deployment tool for .NET web applications.
+A .NET library for automating tasks and workflows.
