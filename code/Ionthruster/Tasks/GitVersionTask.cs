@@ -1,12 +1,11 @@
 using Ionthruster.Config;
 using Ionthruster.Infrastructure;
-using Ionthruster.Tasks;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Middleware
+namespace Ionthruster.Tasks
 {
     public class GitVersionTask : ITask<string, string>
     {

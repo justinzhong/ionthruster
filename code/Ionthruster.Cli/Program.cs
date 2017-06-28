@@ -1,6 +1,4 @@
-﻿using Ionthruster.Config;
-using Ionthruster.Middleware;
-using Ionthruster.Tasks;
+﻿using Ionthruster.Middleware;
 using System;
 using System.Threading.Tasks;
 
@@ -10,18 +8,9 @@ namespace Ionthruster.Cli
     {
         static void Main(string[] args)
         {
-            Task.Run(() => Thruster.StartAsync(Run)).Wait();
+            Task.Run(() => Thruster.Start<BuildMiddleware>()).Wait();
 
             Console.ReadKey();
-        }
-
-        private static async Task Run(IPipelineScope scope)
-        {
-            var buildConfig = new BuildConfig();
-
-            // User defined pipeline starts here
-            await scope.Start<GitVersionTask>(buildConfig.ProjectPath)
-                .Flush();
         }
     }
 }

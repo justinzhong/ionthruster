@@ -1,10 +1,9 @@
 using Ionthruster.Config;
 using Ionthruster.Instrumentation;
-using Ionthruster.Tasks;
 using System;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Middleware
+namespace Ionthruster.Tasks
 {
     public class MSBuildTask : ITask<string, string>
     {

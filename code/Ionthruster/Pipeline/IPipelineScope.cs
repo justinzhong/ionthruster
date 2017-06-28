@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Ionthruster.Tasks;
+using System;
 
-namespace Ionthruster.Tasks
+namespace Ionthruster.Pipeline
 {
     public interface IPipelineScope : IDisposable
     {

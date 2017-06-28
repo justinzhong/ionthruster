@@ -75,22 +75,24 @@
     <Compile Include="Infrastructure\ProcessRunner.cs" />
     <Compile Include="Config\GitVersionConfig.cs" />
     <Compile Include="Config\IConfig.cs" />
-    <Compile Include="Middleware\GitVersionInfo.cs" />
+    <Compile Include="Middleware\BuildMiddleware.cs" />
+    <Compile Include="Middleware\IMiddleware.cs" />
+    <Compile Include="Modules\CoreModule.cs" />
+    <Compile Include="Tasks\GitVersionInfo.cs" />
     <Compile Include="Modules\ConfigModule.cs" />
-    <Compile Include="Tasks\IPipelineScope.cs" />
-    <Compile Include="Tasks\PipelineFactory.cs" />
-    <Compile Include="Tasks\PipelineScope.cs" />
+    <Compile Include="Pipeline\IPipelineScope.cs" />
+    <Compile Include="Pipeline\PipelineScope.cs" />
     <Compile Include="Modules\BuildModule.cs" />
-    <Compile Include="Middleware\CreateOutputDirTask.cs" />
-    <Compile Include="Middleware\GitVersionTask.cs" />
+    <Compile Include="Tasks\CreateOutputDirTask.cs" />
+    <Compile Include="Tasks\GitVersionTask.cs" />
     <Compile Include="Config\IBuildConfig.cs" />
     <Compile Include="Instrumentation\ILogger.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Instrumentation\Logger.cs" />
-    <Compile Include="Tasks\ITaskPipeline.cs" />
-    <Compile Include="Middleware\MSBuildTask.cs" />
+    <Compile Include="Pipeline\ITaskPipeline.cs" />
+    <Compile Include="Tasks\MSBuildTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tasks\TaskPipeline.cs" />
+    <Compile Include="Pipeline\TaskPipeline.cs" />
     <Compile Include="Thruster.cs" />
   </ItemGroup>
   <ItemGroup>

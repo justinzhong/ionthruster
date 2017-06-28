@@ -1,21 +1,21 @@
 using Ionthruster.Containers;
+using Ionthruster.Tasks;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Tasks
+namespace Ionthruster.Pipeline
 {
     public class PipelineScope : IPipelineScope
     {
         private IComponentContainer Container { get; }
         private bool Disposed { get; set; }
 
-        public PipelineScope(IComponentContainerFactory containerFactory, Assembly moduleAssembly)
+        public PipelineScope(IComponentContainer container)
         {
-            if (containerFactory == null) throw new ArgumentNullException(nameof(containerFactory));
-            if (moduleAssembly == null) throw new ArgumentNullException(nameof(moduleAssembly));
+            if (container == null) throw new ArgumentNullException(nameof(container));
 
-            Container = containerFactory.Create(moduleAssembly);
+            Container = container;
         }
 
         ITaskPipeline<string> IPipelineScope.Start<TTask>()

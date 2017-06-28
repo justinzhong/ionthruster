@@ -1,4 +1,4 @@
-﻿namespace Ionthruster.Middleware
+﻿namespace Ionthruster.Tasks
 {
     public class GitVersionInfo
     {

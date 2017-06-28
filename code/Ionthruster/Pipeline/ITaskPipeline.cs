@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Ionthruster.Tasks;
+using System.Threading.Tasks;
 
-namespace Ionthruster.Tasks
+namespace Ionthruster.Pipeline
 {
     public interface ITaskPipeline<TOutput>
     {

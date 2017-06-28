@@ -2,7 +2,7 @@ using Ionthruster.Containers;
 using System;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Tasks
+namespace Ionthruster.Pipeline
 {
     public class TaskPipeline<TOutput> : ITaskPipeline<TOutput>
     {
