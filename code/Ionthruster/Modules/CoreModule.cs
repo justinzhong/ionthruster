@@ -1,8 +1,5 @@
 ﻿using Autofac;
-using Ionthruster.Config;
-using Ionthruster.Infrastructure;
 using Ionthruster.Instrumentation;
-using Ionthruster.Tasks;
 using System;
 
 namespace Ionthruster.Modules

@@ -1,5 +1,6 @@
 ﻿using Ionthruster.Tasks;
 using System;
+using System.Threading.Tasks;
 
 namespace Ionthruster.Pipeline
 {
@@ -14,5 +15,7 @@ namespace Ionthruster.Pipeline
         ITaskPipeline<TOutput> Start<TTask, TOutput>() where TTask : class, ITask<TOutput>;
 
         ITaskPipeline<TOutput> Start<TInput, TTask, TOutput>(TInput arg) where TTask : class, ITask<TInput, TOutput>;
+
+        Task StartMiddleware<TMiddleware>();
     }
 }
