@@ -4,6 +4,6 @@ namespace Ionthruster.Infrastructure
 {
     public interface IProcessRunner
     {
-        Task<string> Run(string workingDirectory, string executable);
+        Task<string> Run(string workingDirectory, string executable, params string[] parameters);
     }
 }

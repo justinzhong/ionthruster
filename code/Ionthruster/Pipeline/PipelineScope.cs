@@ -76,5 +76,10 @@ namespace Ionthruster.Pipeline
 
             return new TaskPipeline<TOutput>(Container, taskDelegate);
         }
+
+        public Task StartMiddleware<TMiddleware>()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

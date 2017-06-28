@@ -1,4 +1,5 @@
 ﻿using Ionthruster.Config;
+using Ionthruster.Infrastructure;
 using Ionthruster.Pipeline;
 using Ionthruster.Tasks;
 using System;
@@ -26,26 +27,20 @@ namespace Ionthruster.Middleware
     public class CleanMiddleware : IMiddleware
     {
         private IBuildConfig Config { get; }
+        private IBuildAgent BuildAgent { get; }
 
-        public CleanMiddleware(IBuildConfig config)
+        public CleanMiddleware(IBuildConfig config, IBuildAgent buildAgent)
         {
             if (config == null) throw new ArgumentNullException(nameof(config));
+            if (buildAgent == null) throw new ArgumentNullException(nameof(buildAgent));
 
             Config = config;
+            BuildAgent = buildAgent;
         }
 
         public async Task Run(IPipelineScope scope)
         {
-            await scope.Start<string, CleanTask, bool>(Config.ProjectPath)
-                .Flush();
-        }
-    }
-
-    public class CleanTask : ITask<string, bool>
-    {
-        public Task<bool> Run(string projectPath)
-        {
-            return Task.FromResult(true);
+            await BuildAgent.Build(Config.ProjectPath, "/t:Clean");
         }
     }
 }

@@ -65,12 +65,15 @@
   <ItemGroup>
     <Compile Include="Config\BuildConfig.cs" />
     <Compile Include="Config\ConfigLoader.cs" />
+    <Compile Include="Config\MsBuildAgentConfig.cs" />
     <Compile Include="Containers\AutofacComponentContainer.cs" />
     <Compile Include="Containers\AutofacComponentContainerFactory.cs" />
     <Compile Include="Containers\IComponentContainer.cs" />
     <Compile Include="Containers\IComponentContainerFactory.cs" />
+    <Compile Include="Infrastructure\IBuildAgent.cs" />
     <Compile Include="Infrastructure\INugetPackageFinder.cs" />
     <Compile Include="Infrastructure\IProcessRunner.cs" />
+    <Compile Include="Infrastructure\MsBuildAgent.cs" />
     <Compile Include="Infrastructure\NugetPackageFinder.cs" />
     <Compile Include="Infrastructure\ProcessRunner.cs" />
     <Compile Include="Config\GitVersionConfig.cs" />
@@ -100,6 +103,7 @@
     <None Include="Config\GitVersionConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Config\MsBuildAgentConfig.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
