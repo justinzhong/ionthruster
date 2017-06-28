@@ -2,12 +2,17 @@ using System.Threading.Tasks;
 
 namespace Ionthruster.Tasks
 {
-    public interface ITask<TOutput>
+    public interface ITask
     {
-        Task<TOutput> Run();
+
     }
 
-    public interface ITask<in TInput, TOutput>
+    public interface IActionTask : ITask
+    {
+        Task Run();
+    }
+
+    public interface IFuncTask<TInput, TOutput> : ITask
     {
         Task<TOutput> Run(TInput input);
     }

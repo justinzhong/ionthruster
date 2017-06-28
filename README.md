@@ -1,3 +1,3 @@
 # Ionthruster
 
-A .NET library for automating tasks and workflows.
+A lightweight, middleware framework for running tasks in C#

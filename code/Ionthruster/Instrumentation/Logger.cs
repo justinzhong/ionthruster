@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ionthruster.Time;
+using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,10 +9,10 @@ namespace Ionthruster.Instrumentation
 {
     public class Logger : ILogger
     {
-        private Func<DateTime> Now { get; }
-        private Action<string> Writer { get; }
+        private IDateTimeProvider Now { get; }
+        private ILogWriter Writer { get; }
 
-        public Logger(Func<DateTime> now, Action<string> writer)
+        public Logger(IDateTimeProvider now, ILogWriter writer)
         {
             if (now == null) throw new ArgumentNullException(nameof(now));
             if (writer == null) throw new ArgumentNullException(nameof(writer));
@@ -28,7 +29,7 @@ namespace Ionthruster.Instrumentation
 
             await Task.Run(() =>
             {
-                Writer($"[{callerName}@{timestamp}] {message}");
+                Writer.Log($"[{callerName}@{timestamp}] {message}");
             });
         }
 
@@ -43,7 +44,7 @@ namespace Ionthruster.Instrumentation
 
         private string GetTimestamp()
         {
-            return Now().ToString("yyyy-MM-dd hh:mm:ss");
+            return Now.GetCurrentDateTime().ToString("yyyy-MM-dd hh:mm:ss");
         }
     }
 }

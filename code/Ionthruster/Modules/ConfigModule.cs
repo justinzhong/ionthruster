@@ -1,7 +1,7 @@
-using System;
-using System.Linq;
 using Autofac;
 using Ionthruster.Config;
+using System;
+using System.Linq;
 
 namespace Ionthruster.Modules
 {
