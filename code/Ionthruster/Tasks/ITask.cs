@@ -33,7 +33,7 @@ namespace Ionthruster.Tasks
 
         IGlue Join<IActionTask>();
 
-        IGlue<TNextOutput> Join<TInput, TNextOutput>(Func<IFuncTask<TInput, TNextOutput>> taskProvider);
+        IGlue<TNextOutput> Join<TNextOutput>(Func<IFuncTask<TOutput, TNextOutput>> taskProvider);
     }
 
     public interface ICleanProjectTask : IActionTask { }
@@ -52,7 +52,8 @@ namespace Ionthruster.Tasks
                  .Join(() => default(IGitVersionTask))
                  .Join<ICleanProjectTask>()
                  .Join(() => default(IBuildTask))
-                 .Join(() => default(IBuildTask))
+                 .Join(() => default(IGitVersionTask))
+                 .Join(() => default(IBuildTask));
         }
     }
 }
