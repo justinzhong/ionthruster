@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ionthruster.Tasks
 {
     [Description(@"Cleans the build artefacts of a .NET project")]
-    public class CleanProjectTask : IVoidTask
+    public class CleanProjectTask : IActionTask
     {
         private IBuildConfig Config { get; }
         private IBuildAgent BuildAgent { get; }
