@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ionthruster.Tasks
 {
-    public class GitVersionTask : ITask<string, string>
+    public class GitVersionTask : IInputOutputTask<string, string>
     {
         private static readonly string GitVersion = "GitVersion.CommandLine";
 

@@ -18,30 +18,30 @@ namespace Ionthruster.Pipeline
             Container = container;
         }
 
-        ITaskPipeline<string> IPipelineScope.Start<TTask>()
-        {
-            return BuildPipeline<TTask, string>();
-        }
+        //ITaskPipeline<string> IPipelineScope.Start<TTask>()
+        //{
+        //    return BuildPipeline<TTask, string>();
+        //}
 
-        ITaskPipeline<string> IPipelineScope.Start<TTask>(string arg)
-        {
-            return BuildPipeline<string, TTask, string>(arg);
-        }
+        //ITaskPipeline<string> IPipelineScope.Start<TTask>(string arg)
+        //{
+        //    return BuildPipeline<string, TTask, string>(arg);
+        //}
 
-        ITaskPipeline<string> IPipelineScope.Start<TInput, TTask>(TInput arg)
-        {
-            return BuildPipeline<TInput, TTask, string>(arg);
-        }
+        //ITaskPipeline<string> IPipelineScope.Start<TInput, TTask>(TInput arg)
+        //{
+        //    return BuildPipeline<TInput, TTask, string>(arg);
+        //}
 
-        ITaskPipeline<TOutput> IPipelineScope.Start<TTask, TOutput>()
-        {
-            return BuildPipeline<TTask, TOutput>();
-        }
+        //ITaskPipeline<TOutput> IPipelineScope.Start<TTask, TOutput>()
+        //{
+        //    return BuildPipeline<TTask, TOutput>();
+        //}
 
-        ITaskPipeline<TOutput> IPipelineScope.Start<TInput, TTask, TOutput>(TInput arg)
-        {
-            return BuildPipeline<TInput, TTask, TOutput>(arg);
-        }
+        //ITaskPipeline<TOutput> IPipelineScope.Start<TInput, TTask, TOutput>(TInput arg)
+        //{
+        //    return BuildPipeline<TInput, TTask, TOutput>(arg);
+        //}
 
         public void Dispose()
         {

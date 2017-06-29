@@ -15,32 +15,10 @@ namespace Ionthruster.Middleware
         {
             var buildConfig = new BuildConfig();
 
-            await scope.StartMiddleware<CleanMiddleware>();
-
             // Specifying the Build tasks here
-            await scope.Start<GitVersionTask>(buildConfig.ProjectPath)
+            await scope.Start<CleanProjectTask>()
+                .Branch<GitVersionTask, string>()
                 .Flush();
-        }
-    }
-
-    [Description(@"Cleans the build artefacts of a .NET project")]
-    public class CleanMiddleware : IMiddleware
-    {
-        private IBuildConfig Config { get; }
-        private IBuildAgent BuildAgent { get; }
-
-        public CleanMiddleware(IBuildConfig config, IBuildAgent buildAgent)
-        {
-            if (config == null) throw new ArgumentNullException(nameof(config));
-            if (buildAgent == null) throw new ArgumentNullException(nameof(buildAgent));
-
-            Config = config;
-            BuildAgent = buildAgent;
-        }
-
-        public async Task Run(IPipelineScope scope)
-        {
-            await BuildAgent.Build(Config.ProjectPath, "/t:Clean");
         }
     }
 }

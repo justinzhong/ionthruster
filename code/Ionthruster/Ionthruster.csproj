@@ -79,6 +79,7 @@
     <Compile Include="Config\GitVersionConfig.cs" />
     <Compile Include="Config\IConfig.cs" />
     <Compile Include="Middleware\BuildMiddleware.cs" />
+    <Compile Include="Tasks\CleanProjectTask.cs" />
     <Compile Include="Middleware\IMiddleware.cs" />
     <Compile Include="Modules\CoreModule.cs" />
     <Compile Include="Tasks\GitVersionInfo.cs" />

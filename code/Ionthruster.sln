@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster", "Ionthruster\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster.Cli", "Ionthruster.Cli\Ionthruster.Cli.csproj", "{8D9B033C-9222-4DD1-9155-FD7040C14D6E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{49B82F72-F1E3-449F-BC79-19CD05FEF1E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster.Test", "test\Ionthruster.Test\Ionthruster.Test.csproj", "{45AC23D1-BE00-4273-909D-739327092DEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{8D9B033C-9222-4DD1-9155-FD7040C14D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D9B033C-9222-4DD1-9155-FD7040C14D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D9B033C-9222-4DD1-9155-FD7040C14D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45AC23D1-BE00-4273-909D-739327092DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AC23D1-BE00-4273-909D-739327092DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AC23D1-BE00-4273-909D-739327092DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AC23D1-BE00-4273-909D-739327092DEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{45AC23D1-BE00-4273-909D-739327092DEC} = {49B82F72-F1E3-449F-BC79-19CD05FEF1E2}
 	EndGlobalSection
 EndGlobal
