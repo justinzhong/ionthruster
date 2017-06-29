@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Ionthruster.Config;
 using Ionthruster.Infrastructure;
 using Ionthruster.Tasks;
 

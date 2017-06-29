@@ -8,7 +8,7 @@ namespace Ionthruster.Cli
     {
         static void Main(string[] args)
         {
-            Task.Run(() => Thruster.Start<BuildMiddleware>()).Wait();
+            Thruster.Start<BuildMiddleware>().Wait();
 
             Console.ReadKey();
         }
