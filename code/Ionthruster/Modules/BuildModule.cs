@@ -9,7 +9,6 @@ namespace Ionthruster.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<BuildConfig>().As<IBuildConfig>();
             builder.RegisterType<NugetPackageFinder>().As<INugetPackageFinder>();
             builder.RegisterType<ProcessRunner>().As<IProcessRunner>();
             builder.RegisterType<GitVersionTask>();

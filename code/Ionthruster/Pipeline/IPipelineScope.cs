@@ -1,4 +1,6 @@
-﻿using Ionthruster.Tasks;
+﻿using Ionthruster.Containers;
+using Ionthruster.Middleware;
+using Ionthruster.Tasks;
 using System;
 using System.Threading.Tasks;
 
@@ -6,18 +8,10 @@ namespace Ionthruster.Pipeline
 {
     public interface IPipelineScope : IDisposable
     {
-        ITaskPipeline Start<TTask>() where TTask : class, ITask;
+        ITaskPipeline Start<TTask>() where TTask : class, IActionTask;
 
-        //ITaskPipeline<string> Start<TTask>() where TTask : class, ITask<string>;
+        ITaskPipeline<TOutput> Start<TInput, TOutput>(TInput input, Func<IComponentContainer, IFuncTask<TInput, TOutput>> taskFactory);
 
-        //ITaskPipeline<string> Start<TTask>(string arg) where TTask : class, ITask<string, string>;
-
-        //ITaskPipeline<string> Start<TInput, TTask>(TInput arg) where TTask : class, ITask<TInput, string>;
-
-        //ITaskPipeline<TOutput> Start<TTask, TOutput>() where TTask : class, ITask<TOutput>;
-
-        //ITaskPipeline<TOutput> Start<TInput, TTask, TOutput>(TInput arg) where TTask : class, ITask<TInput, TOutput>;
-
-        //Task StartMiddleware<TMiddleware>();
+        Task StartMiddleware<TMiddleware>() where TMiddleware : class, IMiddleware;
     }
 }

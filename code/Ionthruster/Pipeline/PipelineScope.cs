@@ -1,7 +1,6 @@
 using Ionthruster.Containers;
 using Ionthruster.Tasks;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Ionthruster.Pipeline
@@ -9,39 +8,39 @@ namespace Ionthruster.Pipeline
     public class PipelineScope : IPipelineScope
     {
         private IComponentContainer Container { get; }
+        private ITaskDelegateWrapper DelegateWrapper { get; }
         private bool Disposed { get; set; }
 
-        public PipelineScope(IComponentContainer container)
+        public PipelineScope(IComponentContainer container, ITaskDelegateWrapper delegateWrapper)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
+            if (delegateWrapper == null) throw new ArgumentNullException(nameof(delegateWrapper));
 
             Container = container;
+            DelegateWrapper = delegateWrapper;
         }
 
-        //ITaskPipeline<string> IPipelineScope.Start<TTask>()
-        //{
-        //    return BuildPipeline<TTask, string>();
-        //}
+        ITaskPipeline IPipelineScope.Start<TTask>()
+        {
+            var taskDelegate = DelegateWrapper.Wrap(() => Container.Resolve<TTask>());
 
-        //ITaskPipeline<string> IPipelineScope.Start<TTask>(string arg)
-        //{
-        //    return BuildPipeline<string, TTask, string>(arg);
-        //}
+            return new TaskPipeline(Container, DelegateWrapper, taskDelegate);
+        }
 
-        //ITaskPipeline<string> IPipelineScope.Start<TInput, TTask>(TInput arg)
-        //{
-        //    return BuildPipeline<TInput, TTask, string>(arg);
-        //}
+        public ITaskPipeline<TOutput> Start<TInput, TOutput>(TInput input, Func<IComponentContainer, IFuncTask<TInput, TOutput>> taskFactory)
+        {
+            var taskProvider = taskFactory(Container);
+            var taskDelegate = DelegateWrapper.Wrap(input, () => taskProvider);
 
-        //ITaskPipeline<TOutput> IPipelineScope.Start<TTask, TOutput>()
-        //{
-        //    return BuildPipeline<TTask, TOutput>();
-        //}
+            return new TaskPipeline<TOutput>(Container, DelegateWrapper, taskDelegate);
+        }
 
-        //ITaskPipeline<TOutput> IPipelineScope.Start<TInput, TTask, TOutput>(TInput arg)
-        //{
-        //    return BuildPipeline<TInput, TTask, TOutput>(arg);
-        //}
+        async Task IPipelineScope.StartMiddleware<TMiddleware>()
+        {
+            var middleware = Container.Resolve<TMiddleware>();
+
+            await middleware.Run(this);
+        }
 
         public void Dispose()
         {
@@ -49,37 +48,6 @@ namespace Ionthruster.Pipeline
 
             Container.Dispose();
             Disposed = true;
-        }
-
-        private ITaskPipeline<TOutput> BuildPipeline<TTask, TOutput>()
-           where TTask : class, ITask<TOutput>
-        {
-            Func<Task<TOutput>> taskDelegate = async () =>
-            {
-                var task = Container.Resolve<TTask>();
-
-                return await task.Run();
-            };
-
-            return new TaskPipeline<TOutput>(Container, taskDelegate);
-        }
-
-        private ITaskPipeline<TOutput> BuildPipeline<TInput, TTask, TOutput>(TInput arg)
-            where TTask : class, ITask<TInput, TOutput>
-        {
-            Func<Task<TOutput>> taskDelegate = async () =>
-            {
-                var task = Container.Resolve<TTask>();
-
-                return await task.Run(arg);
-            };
-
-            return new TaskPipeline<TOutput>(Container, taskDelegate);
-        }
-
-        public Task StartMiddleware<TMiddleware>()
-        {
-            throw new NotImplementedException();
         }
     }
 }

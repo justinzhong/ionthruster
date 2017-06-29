@@ -1,17 +1,16 @@
 using Ionthruster.Containers;
-using Ionthruster.Tasks;
 using System;
 using System.Threading.Tasks;
 
 namespace Ionthruster.Pipeline
 {
-    public class TaskPipeline : ITaskPipeline
+    public class TaskPipeline<TOutput> : ITaskPipeline<TOutput>
     {
         private IComponentContainer Container { get; }
         private ITaskDelegateWrapper DelegateWrapper { get; }
-        private Func<Task> TaskDelegate { get; }
+        private Func<Task<TOutput>> TaskDelegate { get; }
 
-        public TaskPipeline(IComponentContainer container, ITaskDelegateWrapper delegateWrapper, Func<Task> taskDelegate)
+        public TaskPipeline(IComponentContainer container, ITaskDelegateWrapper delegateWrapper, Func<Task<TOutput>> taskDelegate)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
             if (delegateWrapper == null) throw new ArgumentNullException(nameof(delegateWrapper));
@@ -22,25 +21,27 @@ namespace Ionthruster.Pipeline
             TaskDelegate = taskDelegate;
         }
 
-        public async Task Flush()
+        public async Task<TOutput> Flush()
         {
-            await TaskDelegate();
+            if (TaskDelegate == null) throw new ApplicationException("Pipeline is empty");
+
+            return await TaskDelegate();
         }
 
-        ITaskPipeline ITaskPipeline.Join<TTask>()
+        ITaskPipeline ITaskPipeline<TOutput>.Join<TTask>()
         {
             var taskDelegate = DelegateWrapper.Wrap(() => Container.Resolve<TTask>());
 
             return new TaskPipeline(Container, DelegateWrapper, taskDelegate);
         }
 
-        public ITaskPipeline<TOutput> Join<TInput, TOutput>(TInput input, Func<IComponentContainer, IFuncTask<TInput, TOutput>> taskProvider)
+        public ITaskPipeline<TNextOutput> Join<TNextOutput>(Func<Tasks.IFuncTask<TOutput, TNextOutput>> taskProvider)
         {
             if (taskProvider == null) throw new ArgumentNullException(nameof(taskProvider));
 
-            var taskDelegate = DelegateWrapper.Wrap(input, () => taskProvider(Container));
+            var taskDelegate = DelegateWrapper.Wrap(async () => await Flush(), taskProvider);
 
-            return new TaskPipeline<TOutput>(Container, DelegateWrapper, taskDelegate);
+            return new TaskPipeline<TNextOutput>(Container, DelegateWrapper, taskDelegate);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Ionthruster
         public static async Task Start<TMiddleware>(IComponentContainerFactory containerFactory, Assembly moduleAssembly)
         {
             using (var container = containerFactory.Create(moduleAssembly))
-            using (var scope = new PipelineScope(container))
+            using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
                 var middleware = container.Resolve<IMiddleware>(typeof(TMiddleware));
                 await middleware.Run(scope);
@@ -47,7 +47,8 @@ namespace Ionthruster
 
         public static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainerFactory containerFactory, Assembly moduleAssembly)
         {
-            using (var scope = new PipelineScope(containerFactory.Create(moduleAssembly)))
+            using (var container = containerFactory.Create(moduleAssembly))
+            using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
                 await runner(scope);
             }

@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\BuildConfig.cs" />
+    <Compile Include="Config\ProjectConfig.cs" />
     <Compile Include="Config\ConfigLoader.cs" />
     <Compile Include="Config\MsBuildAgentConfig.cs" />
     <Compile Include="Containers\AutofacComponentContainer.cs" />
@@ -79,6 +79,10 @@
     <Compile Include="Config\GitVersionConfig.cs" />
     <Compile Include="Config\IConfig.cs" />
     <Compile Include="Middleware\BuildMiddleware.cs" />
+    <Compile Include="Pipeline\ITaskDelegateWrapper.cs" />
+    <Compile Include="Pipeline\ITaskPipeline%27TOutput.cs" />
+    <Compile Include="Pipeline\TaskDelegateWrapper.cs" />
+    <Compile Include="Pipeline\TaskPipeline.cs" />
     <Compile Include="Tasks\CleanProjectTask.cs" />
     <Compile Include="Middleware\IMiddleware.cs" />
     <Compile Include="Modules\CoreModule.cs" />
@@ -89,19 +93,20 @@
     <Compile Include="Modules\BuildModule.cs" />
     <Compile Include="Tasks\CreateOutputDirTask.cs" />
     <Compile Include="Tasks\GitVersionTask.cs" />
-    <Compile Include="Config\IBuildConfig.cs" />
     <Compile Include="Instrumentation\ILogger.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Instrumentation\Logger.cs" />
     <Compile Include="Pipeline\ITaskPipeline.cs" />
-    <Compile Include="Tasks\MSBuildTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pipeline\TaskPipeline.cs" />
+    <Compile Include="Pipeline\TaskPipeline%27TOutput.cs" />
     <Compile Include="Thruster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Config\GitVersionConfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\ProjectConfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Config\MsBuildAgentConfig.json" />

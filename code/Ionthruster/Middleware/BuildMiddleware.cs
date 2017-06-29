@@ -1,5 +1,4 @@
 ﻿using Ionthruster.Config;
-using Ionthruster.Infrastructure;
 using Ionthruster.Pipeline;
 using Ionthruster.Tasks;
 using System;
@@ -11,13 +10,20 @@ namespace Ionthruster.Middleware
     [Description(@"Performs the build and package of a .NET project")]
     public class BuildMiddleware : IMiddleware
     {
+        private ProjectConfig Config { get; }
+
+        public BuildMiddleware(ProjectConfig config)
+        {
+            if (config == null) throw new ArgumentNullException(nameof(config));
+
+            Config = config;
+        }
+
         public async Task Run(IPipelineScope scope)
         {
-            var buildConfig = new BuildConfig();
-
-            // Specifying the Build tasks here
+            // Specify the Build tasks here
             await scope.Start<CleanProjectTask>()
-                .Branch<GitVersionTask, string>()
+                .Join(Config.ProjectPath, container => container.Resolve<GitVersionTask>())
                 .Flush();
         }
     }

@@ -5,20 +5,19 @@ using System.Threading.Tasks;
 
 namespace Ionthruster.Tasks
 {
-    public class CreateOutputDirTask : ITask<int, string>
+    public class CreateOutputDirTask : IFuncTask<string, string>
     {
-        private IBuildConfig Config { get; }
+        private ProjectConfig Config { get; }
 
-        public CreateOutputDirTask(IBuildConfig config)
+        public CreateOutputDirTask(ProjectConfig config)
         {
             if (config == null) throw new ArgumentNullException(nameof(config));
 
             Config = config;
         }
 
-        public async Task<string> Run(int buildNumberVal)
+        public async Task<string> Run(string buildNumber)
         {
-            var buildNumber = buildNumberVal.ToString();
             var path = Path.Combine(Config.OutputPath, buildNumber);
 
             Console.WriteLine($"[CreateOutputDirTask] Returns: {path}");
