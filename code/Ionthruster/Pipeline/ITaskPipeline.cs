@@ -48,7 +48,7 @@ namespace Ionthruster.Pipeline
         //}
     }
 
-    public class OutputTask : IOutputTask<bool>
+    public class OutputTask : IFuncTask<bool>
     {
         public Task<bool> Run()
         {

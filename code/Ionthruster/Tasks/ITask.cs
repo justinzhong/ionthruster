@@ -12,12 +12,7 @@ namespace Ionthruster.Tasks
         Task Run();
     }
 
-    public interface IOutputTask<TOutput> : ITask
-    {
-        Task<TOutput> Run();
-    }
-
-    public interface IInputOutputTask<in TInput, TOutput> : ITask
+    public interface IFuncTask<in TInput, TOutput> : ITask
     {
         Task<TOutput> Run(TInput input);
     }

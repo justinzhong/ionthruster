@@ -20,14 +20,14 @@ namespace Ionthruster.Test
     public interface ITaskPipeline<out TTask>
         where TTask : ITask
     {
-        ITaskPipeline<ITask> Join<TNextTask>()
+        ITaskPipeline<TNextTask> Join<TNextTask>()
             where TNextTask : class, ITask;
     }
 
     public class TaskPipeline<TTask> : ITaskPipeline<TTask>
         where TTask : ITask
     {
-        ITaskPipeline<ITask> ITaskPipeline<TTask>.Join<TNextTask>()
+        ITaskPipeline<TNextTask> ITaskPipeline<TTask>.Join<TNextTask>()
         {
             return new TaskPipeline<TNextTask>();
         }
