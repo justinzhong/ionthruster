@@ -1,11 +1,11 @@
-using Ionthruster.Build.Config;
-using Ionthruster.Build.Infrastructure;
+using Ionthruster.Middleware.Build.Config;
+using Ionthruster.Middleware.Build.Infrastructure;
 using Ionthruster.Tasks;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Build.Tasks
+namespace Ionthruster.Middleware.Build.Tasks
 {
     [Description(@"Cleans the build artefacts of a .NET project")]
     public class CleanProjectTask : IActionTask

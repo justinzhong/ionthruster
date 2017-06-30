@@ -1,6 +1,6 @@
 using Ionthruster.Config;
 
-namespace Ionthruster.Build.Config
+namespace Ionthruster.Middleware.Build.Config
 {
     public class GitVersionConfig : IConfig
     {

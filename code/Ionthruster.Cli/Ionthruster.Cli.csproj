@@ -56,13 +56,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ionthruster.Build\Ionthruster.Build.csproj">
-      <Project>{d9f010af-9a6b-44bb-9470-2c20e02986a7}</Project>
-      <Name>Ionthruster.Build</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ionthruster\Ionthruster.csproj">
       <Project>{85b133fe-d0c6-4eeb-94b3-d97c3b7961b5}</Project>
       <Name>Ionthruster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\middleware\Ionthruster.Middleware.Build\Ionthruster.Middleware.Build.csproj">
+      <Project>{D9F010AF-9A6B-44BB-9470-2C20E02986A7}</Project>
+      <Name>Ionthruster.Middleware.Build</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

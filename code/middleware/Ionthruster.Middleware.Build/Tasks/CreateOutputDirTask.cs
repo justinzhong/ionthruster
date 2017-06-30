@@ -1,10 +1,10 @@
-using Ionthruster.Build.Config;
+using Ionthruster.Middleware.Build.Config;
 using Ionthruster.Tasks;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Build.Tasks
+namespace Ionthruster.Middleware.Build.Tasks
 {
     public class CreateOutputDirTask : IFuncTask<string, string>
     {

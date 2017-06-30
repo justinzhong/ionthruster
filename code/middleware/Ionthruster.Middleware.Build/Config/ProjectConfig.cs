@@ -2,7 +2,7 @@ using Ionthruster.Config;
 using System;
 using System.IO;
 
-namespace Ionthruster.Build.Config
+namespace Ionthruster.Middleware.Build.Config
 {
     public class ProjectConfig : IConfig
     {

@@ -1,7 +1,7 @@
 ﻿using Autofac;
-using Ionthruster.Build.Infrastructure;
+using Ionthruster.Middleware.Build.Infrastructure;
 
-namespace Ionthruster.Build.Modules
+namespace Ionthruster.Middleware.Build.Modules
 {
     public class AutofacBuildModule : Module
     {

@@ -1,4 +1,4 @@
-﻿using Ionthruster.Build.Middleware;
+﻿using Ionthruster.Middleware.Build;
 using System;
 
 namespace Ionthruster.Cli

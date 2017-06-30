@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{49B82F72-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster.Test", "test\Ionthruster.Test\Ionthruster.Test.csproj", "{45AC23D1-BE00-4273-909D-739327092DEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster.Build", "Ionthruster.Build\Ionthruster.Build.csproj", "{D9F010AF-9A6B-44BB-9470-2C20E02986A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "middleware", "middleware", "{347BBE9D-D400-4640-8D27-DBDA03ACB214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionthruster.Middleware.Build", "middleware\Ionthruster.Middleware.Build\Ionthruster.Middleware.Build.csproj", "{D9F010AF-9A6B-44BB-9470-2C20E02986A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,5 +43,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{45AC23D1-BE00-4273-909D-739327092DEC} = {49B82F72-F1E3-449F-BC79-19CD05FEF1E2}
+		{D9F010AF-9A6B-44BB-9470-2C20E02986A7} = {347BBE9D-D400-4640-8D27-DBDA03ACB214}
 	EndGlobalSection
 EndGlobal

@@ -1,9 +1,9 @@
-﻿using Ionthruster.Build.Config;
+﻿using Ionthruster.Middleware.Build.Config;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Build.Infrastructure
+namespace Ionthruster.Middleware.Build.Infrastructure
 {
     public class MsBuildAgent : IBuildAgent
     {

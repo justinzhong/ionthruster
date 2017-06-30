@@ -7,8 +7,8 @@
     <ProjectGuid>{D9F010AF-9A6B-44BB-9470-2C20E02986A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ionthruster.Build</RootNamespace>
-    <AssemblyName>Ionthruster.Build</AssemblyName>
+    <RootNamespace>Ionthruster.Middleware.Build</RootNamespace>
+    <AssemblyName>Ionthruster.Middleware.Build</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -66,7 +66,7 @@
     <Compile Include="Infrastructure\MsBuildAgent.cs" />
     <Compile Include="Infrastructure\NugetPackageFinder.cs" />
     <Compile Include="Infrastructure\ProcessRunner.cs" />
-    <Compile Include="Middleware\BuildMiddleware.cs" />
+    <Compile Include="BuildMiddleware.cs" />
     <Compile Include="Modules\AutofacBuildModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\CleanProjectTask.cs" />
@@ -85,7 +85,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ionthruster\Ionthruster.csproj">
+    <ProjectReference Include="..\..\Ionthruster\Ionthruster.csproj">
       <Project>{85b133fe-d0c6-4eeb-94b3-d97c3b7961b5}</Project>
       <Name>Ionthruster</Name>
     </ProjectReference>
