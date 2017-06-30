@@ -44,7 +44,7 @@ namespace Ionthruster.Pipeline
 
         public void Dispose()
         {
-            if (Disposed) throw new ObjectDisposedException(nameof(PipelineScope));
+            if (Disposed) return;
 
             Container.Dispose();
             Disposed = true;

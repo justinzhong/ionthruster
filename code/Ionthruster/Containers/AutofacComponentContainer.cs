@@ -17,7 +17,7 @@ namespace Ionthruster.Containers
 
         public void Dispose()
         {
-            if (Disposed) throw new ObjectDisposedException(nameof(AutofacComponentContainer));
+            if (Disposed) return;
 
             Scope.Dispose();
             Disposed = true;

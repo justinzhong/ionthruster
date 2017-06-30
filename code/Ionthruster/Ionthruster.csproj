@@ -79,6 +79,7 @@
     <Compile Include="Config\GitVersionConfig.cs" />
     <Compile Include="Config\IConfig.cs" />
     <Compile Include="Middleware\BuildMiddleware.cs" />
+    <Compile Include="Modules\MiddlewareModule.cs" />
     <Compile Include="Pipeline\ITaskDelegateWrapper.cs" />
     <Compile Include="Pipeline\ITaskPipeline%27TOutput.cs" />
     <Compile Include="Pipeline\TaskDelegateWrapper.cs" />

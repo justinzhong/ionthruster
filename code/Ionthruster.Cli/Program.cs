@@ -1,6 +1,5 @@
 ﻿using Ionthruster.Middleware;
 using System;
-using System.Threading.Tasks;
 
 namespace Ionthruster.Cli
 {
