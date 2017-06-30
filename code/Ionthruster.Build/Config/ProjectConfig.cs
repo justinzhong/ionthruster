@@ -1,7 +1,8 @@
+using Ionthruster.Config;
 using System;
 using System.IO;
 
-namespace Ionthruster.Config
+namespace Ionthruster.Build.Config
 {
     public class ProjectConfig : IConfig
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Ionthruster.Infrastructure
+namespace Ionthruster.Build.Infrastructure
 {
     public class NugetPackageFinder : INugetPackageFinder
     {

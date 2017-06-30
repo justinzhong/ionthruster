@@ -6,6 +6,6 @@ namespace Ionthruster.Containers
     {
         IComponentContainer Create<TAssemblyType>();
 
-        IComponentContainer Create(Assembly moduleAssembly);
+        IComponentContainer Create(params Assembly[] moduleAssemblies);
     }
 }

@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IonModules.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ionthruster.Build\Ionthruster.Build.csproj">
+      <Project>{d9f010af-9a6b-44bb-9470-2c20e02986a7}</Project>
+      <Name>Ionthruster.Build</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ionthruster\Ionthruster.csproj">
       <Project>{85b133fe-d0c6-4eeb-94b3-d97c3b7961b5}</Project>
       <Name>Ionthruster</Name>

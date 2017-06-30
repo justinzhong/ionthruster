@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Ionthruster.Infrastructure
+namespace Ionthruster.Build.Infrastructure
 {
     public interface IBuildAgent
     {

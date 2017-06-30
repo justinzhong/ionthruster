@@ -1,8 +1,8 @@
 using Ionthruster.Containers;
+using Ionthruster.Instrumentation;
 using Ionthruster.Middleware;
 using Ionthruster.Pipeline;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Ionthruster
@@ -12,45 +12,91 @@ namespace Ionthruster
         public static async Task Start<TMiddleware>()
             where TMiddleware : IMiddleware
         {
-            var moduleAssembly = Assembly.GetExecutingAssembly();
+            var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             var containerFactory = new AutofacComponentContainerFactory();
 
-            await Start<TMiddleware>(containerFactory, moduleAssembly);
+            using (var container = containerFactory.Create(moduleAssemblies))
+            {
+                await Start<TMiddleware>(container);
+            }
         }
 
         public static async Task Start<TMiddleware>(IComponentContainerFactory containerFactory)
         {
-            var moduleAssembly = Assembly.GetExecutingAssembly();
+            if (containerFactory == null) throw new ArgumentNullException(nameof(containerFactory));
 
-            await Start<TMiddleware>(containerFactory, moduleAssembly);
+            var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            using (var container = containerFactory.Create(moduleAssemblies))
+            {
+                await Start<TMiddleware>(container);
+            }
         }
 
-        public static async Task Start<TMiddleware>(IComponentContainerFactory containerFactory, Assembly moduleAssembly)
+        public static async Task Start<TMiddleware>(IComponentContainer container)
         {
-            using (var container = containerFactory.Create(moduleAssembly))
+            if (container == null) throw new ArgumentNullException(nameof(container));
+
             using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
-                var middleware = container.Resolve<IMiddleware>(typeof(TMiddleware));
-                await middleware.Run(scope);
+                try
+                {
+                    var middleware = container.Resolve<IMiddleware>(typeof(TMiddleware));
+
+                    await middleware.Run(scope);
+                }
+                catch (Exception ex)
+                {
+                    await container.Resolve<ILogger>().Log(ex.ToString());
+
+                    throw;
+                }
             }
         }
 
         public static async Task Start(Func<IPipelineScope, Task> runner)
         {
-            await Start(runner, new AutofacComponentContainerFactory(), Assembly.GetExecutingAssembly());
+            if (runner == null) throw new ArgumentNullException(nameof(runner));
+
+            var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var containerFactory = new AutofacComponentContainerFactory();
+
+            using (var container = containerFactory.Create(moduleAssemblies))
+            {
+                await Start(runner, container);
+            }
         }
 
         public static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainerFactory containerFactory)
         {
-            await Start(runner, containerFactory, Assembly.GetExecutingAssembly());
+            if (runner == null) throw new ArgumentNullException(nameof(runner));
+            if (containerFactory == null) throw new ArgumentNullException(nameof(containerFactory));
+
+            var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            using (var container = containerFactory.Create(moduleAssemblies))
+            {
+                await Start(runner, container);
+            }
         }
 
-        public static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainerFactory containerFactory, Assembly moduleAssembly)
+        public static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainer container)
         {
-            using (var container = containerFactory.Create(moduleAssembly))
+            if (runner == null) throw new ArgumentNullException(nameof(runner));
+            if (container == null) throw new ArgumentNullException(nameof(container));
+
             using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
-                await runner(scope);
+                try
+                {
+                    await runner(scope);
+                }
+                catch (Exception ex)
+                {
+                    await container.Resolve<ILogger>().Log(ex.ToString());
+
+                    throw;
+                }
             }
         }
     }

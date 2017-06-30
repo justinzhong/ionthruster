@@ -1,6 +1,6 @@
 ﻿using NuGet;
 
-namespace Ionthruster.Infrastructure
+namespace Ionthruster.Build.Infrastructure
 {
     public interface INugetPackageFinder
     {

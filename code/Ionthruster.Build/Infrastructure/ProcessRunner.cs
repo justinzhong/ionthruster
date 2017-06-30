@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Infrastructure
+namespace Ionthruster.Build.Infrastructure
 {
     public class ProcessRunner : IProcessRunner
     {

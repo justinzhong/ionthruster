@@ -1,11 +1,12 @@
-﻿using Ionthruster.Config;
+﻿using Ionthruster.Build.Config;
+using Ionthruster.Build.Tasks;
+using Ionthruster.Middleware;
 using Ionthruster.Pipeline;
-using Ionthruster.Tasks;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace Ionthruster.Middleware
+namespace Ionthruster.Build.Middleware
 {
     [Description(@"Performs the build and package of a .NET project")]
     public class BuildMiddleware : IMiddleware

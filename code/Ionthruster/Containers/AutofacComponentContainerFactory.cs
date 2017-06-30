@@ -1,5 +1,4 @@
 using Autofac;
-using System;
 using System.Reflection;
 
 namespace Ionthruster.Containers
@@ -11,10 +10,10 @@ namespace Ionthruster.Containers
             return Create(typeof(TAssemblyType).Assembly);
         }
 
-        public IComponentContainer Create(Assembly moduleAssembly)
+        public IComponentContainer Create(params Assembly[] moduleAssemblies)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterAssemblyModules(moduleAssembly);
+            builder.RegisterAssemblyModules(moduleAssemblies);
 
             var container = builder.Build();
             var scope = container.BeginLifetimeScope();

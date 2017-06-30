@@ -1,16 +1,15 @@
 ﻿using Autofac;
-using Ionthruster.Infrastructure;
-using Ionthruster.Tasks;
+using Ionthruster.Build.Infrastructure;
 
-namespace Ionthruster.Modules
+namespace Ionthruster.Build.Modules
 {
-    public class BuildModule : Module
+    public class AutofacBuildModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<NugetPackageFinder>().As<INugetPackageFinder>();
             builder.RegisterType<ProcessRunner>().As<IProcessRunner>();
-            builder.RegisterType<GitVersionTask>();
+            builder.RegisterType<MsBuildAgent>().As<IBuildAgent>();
         }
     }
 }

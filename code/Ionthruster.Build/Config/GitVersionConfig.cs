@@ -1,4 +1,6 @@
-namespace Ionthruster.Config
+using Ionthruster.Config;
+
+namespace Ionthruster.Build.Config
 {
     public class GitVersionConfig : IConfig
     {

@@ -24,12 +24,18 @@ namespace Ionthruster.Pipeline
 
         public async Task Flush()
         {
+            if (TaskDelegate == null) throw new ApplicationException("Pipeline is empty");
+
             await TaskDelegate();
         }
 
         ITaskPipeline ITaskPipeline.Join<TTask>()
         {
-            var taskDelegate = DelegateWrapper.Wrap(() => Container.Resolve<TTask>());
+            Func<Task> taskDelegate = async () =>
+            {
+                await Flush();
+                await DelegateWrapper.Wrap(() => Container.Resolve<TTask>())();
+            };
 
             return new TaskPipeline(Container, DelegateWrapper, taskDelegate);
         }
@@ -38,7 +44,12 @@ namespace Ionthruster.Pipeline
         {
             if (taskProvider == null) throw new ArgumentNullException(nameof(taskProvider));
 
-            var taskDelegate = DelegateWrapper.Wrap(input, () => taskProvider(Container));
+            Func<Task<TOutput>> taskDelegate = async () =>
+            {
+                await Flush();
+
+                return await DelegateWrapper.Wrap(input, () => taskProvider(Container))();
+            };
 
             return new TaskPipeline<TOutput>(Container, DelegateWrapper, taskDelegate);
         }

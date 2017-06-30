@@ -30,7 +30,11 @@ namespace Ionthruster.Pipeline
 
         ITaskPipeline ITaskPipeline<TOutput>.Join<TTask>()
         {
-            var taskDelegate = DelegateWrapper.Wrap(() => Container.Resolve<TTask>());
+            Func<Task> taskDelegate = async () =>
+            {
+                await Flush();
+                await DelegateWrapper.Wrap(() => Container.Resolve<TTask>())();
+            };
 
             return new TaskPipeline(Container, DelegateWrapper, taskDelegate);
         }
@@ -39,7 +43,12 @@ namespace Ionthruster.Pipeline
         {
             if (taskProvider == null) throw new ArgumentNullException(nameof(taskProvider));
 
-            var taskDelegate = DelegateWrapper.Wrap(async () => await Flush(), taskProvider);
+            Func<Task<TNextOutput>> taskDelegate = async () =>
+            {
+                await Flush();
+
+                return await DelegateWrapper.Wrap(async () => await Flush(), taskProvider)();
+            };
 
             return new TaskPipeline<TNextOutput>(Container, DelegateWrapper, taskDelegate);
         }
