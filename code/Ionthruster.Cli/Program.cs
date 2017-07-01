@@ -7,7 +7,8 @@ namespace Ionthruster.Cli
     {
         static void Main(string[] args)
         {
-            Thruster.Start<BuildMiddleware>().Wait();
+            var container = AutofacConfig.Configure();
+            Thruster.Start<BuildMiddleware>(container).Wait();
 
             Console.ReadKey();
         }

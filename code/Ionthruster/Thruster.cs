@@ -1,3 +1,4 @@
+using Autofac;
 using Ionthruster.Containers;
 using Ionthruster.Instrumentation;
 using Ionthruster.Middleware;
@@ -33,10 +34,18 @@ namespace Ionthruster
             }
         }
 
-        public static async Task Start<TMiddleware>(IComponentContainer container)
+        public static async Task Start<TMiddleware>(IContainer container)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
 
+            using (var componentContainer = new AutofacComponentContainer(container))
+            {
+                await Start<TMiddleware>(componentContainer);
+            }
+        }
+
+        private static async Task Start<TMiddleware>(IComponentContainer container)
+        {
             using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
                 try
@@ -80,11 +89,19 @@ namespace Ionthruster
             }
         }
 
-        public static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainer container)
+        public static async Task Start(Func<IPipelineScope, Task> runner, IContainer container)
         {
             if (runner == null) throw new ArgumentNullException(nameof(runner));
             if (container == null) throw new ArgumentNullException(nameof(container));
 
+            using (var componentContainer = new AutofacComponentContainer(container))
+            {
+                await Start(runner, componentContainer);
+            }
+        }
+
+        private static async Task Start(Func<IPipelineScope, Task> runner, IComponentContainer container)
+        {
             using (var scope = new PipelineScope(container, container.Resolve<ITaskDelegateWrapper>()))
             {
                 try

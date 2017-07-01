@@ -7,13 +7,13 @@ namespace Ionthruster.Modules
 {
     public static class ModulesRegistrar
     {
-        public static void RegisterMiddlewares(ContainerBuilder builder)
+        public static void RegisterIonMiddlewares(this ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
                 .AssignableTo<IMiddleware>();
         }
 
-        public static void RegisterTasks(ContainerBuilder builder)
+        public static void RegisterIonTasks(this ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
                 .AssignableTo<IActionTask>();

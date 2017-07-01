@@ -17,14 +17,20 @@ namespace Ionthruster.Middleware.Build.Infrastructure
 
             Config = config;
             ProcessRunner = processRunner;
+            ProcessRunner.OnOutputReceived += OnOutputReceived;
         }
 
         public async Task Build(string projectPath, params string[] args)
         {
             var windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-            var msBuildPath = Path.GetFullPath(Path.Combine(windowsPath, Config.ToolPath));
+            var msBuildPath = Path.GetFullPath($"{windowsPath}{Config.ToolPath}");
 
             await ProcessRunner.Run(projectPath, msBuildPath, args);
+        }
+
+        private void OnOutputReceived(object sender, string arg)
+        {
+            Console.WriteLine(arg);
         }
     }
 }

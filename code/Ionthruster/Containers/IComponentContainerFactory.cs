@@ -4,8 +4,6 @@ namespace Ionthruster.Containers
 {
     public interface IComponentContainerFactory
     {
-        IComponentContainer Create<TAssemblyType>();
-
         IComponentContainer Create(params Assembly[] moduleAssemblies);
     }
 }

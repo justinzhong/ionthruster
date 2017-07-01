@@ -33,7 +33,7 @@ namespace Ionthruster.Middleware.Build.Tasks
         public async Task<string> Run(string projectPath)
         {
             var gitVersionCliPath = GetGitVersionCliPath(projectPath);
-            var gitVersionOutput = await ProcessRunner.Run(projectPath, gitVersionCliPath);
+            var gitVersionOutput = "123"; //await ProcessRunner.Run(projectPath, gitVersionCliPath);
             var gitVersionInfo = JsonConvert.DeserializeObject<GitVersionInfo>(gitVersionOutput);
 
             await Logger.Log($"SemVer: {gitVersionInfo.FullSemVer}");

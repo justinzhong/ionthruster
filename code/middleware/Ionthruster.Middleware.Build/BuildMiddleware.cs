@@ -1,4 +1,5 @@
-﻿using Ionthruster.Middleware.Build.Config;
+﻿using Ionthruster.Instrumentation;
+using Ionthruster.Middleware.Build.Config;
 using Ionthruster.Middleware.Build.Tasks;
 using Ionthruster.Pipeline;
 using System;
@@ -11,16 +12,22 @@ namespace Ionthruster.Middleware.Build
     public class BuildMiddleware : IMiddleware
     {
         private ProjectConfig Config { get; }
+        private ILogger Logger { get; }
 
-        public BuildMiddleware(ProjectConfig config)
+        public BuildMiddleware(ProjectConfig config, ILogger logger)
         {
             if (config == null) throw new ArgumentNullException(nameof(config));
+            if (logger == null) throw new ArgumentNullException(nameof(logger));
 
             Config = config;
+            Logger = logger;
         }
 
         public async Task Run(IPipelineScope scope)
         {
+            await Logger.Log($@"OutputPath: {Config.OutputPath}");
+            await Logger.Log($@"ProjectPath: {Config.ProjectPath}");
+
             // Specify the Build tasks here
             await scope.Start<CleanProjectTask>()
                 .Join(Config.ProjectPath, container => container.Resolve<GitVersionTask>())

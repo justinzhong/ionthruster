@@ -6,33 +6,33 @@ namespace Ionthruster.Containers
     public sealed class AutofacComponentContainer : IComponentContainer
     {
         private bool Disposed { get; set; }
-        private ILifetimeScope Scope { get; }
+        private IContainer Container { get; }
 
-        public AutofacComponentContainer(ILifetimeScope scope)
+        public AutofacComponentContainer(IContainer container)
         {
-            if (scope == null) throw new ArgumentNullException(nameof(scope));
+            if (container == null) throw new ArgumentNullException(nameof(container));
 
-            Scope = scope;
+            Container = container;
         }
 
         public void Dispose()
         {
             if (Disposed) return;
 
-            Scope.Dispose();
+            Container.Dispose();
             Disposed = true;
         }
 
         public TComponent Resolve<TComponent>()
             where TComponent : class
         {
-            return Scope.Resolve<TComponent>();
+            return Container.Resolve<TComponent>();
         }
 
         public TComponent Resolve<TComponent>(Type componentType)
             where TComponent : class
         {
-            return (TComponent)Scope.Resolve(componentType);
+            return (TComponent)Container.Resolve(componentType);
         }
     }
 }
