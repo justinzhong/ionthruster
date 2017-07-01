@@ -1,4 +1,4 @@
 ﻿{
   "packagesConfig": "packages.config",
-  "packagesPath": "..\\packages"
+  "packagesPath": "..\\..\\packages"
 }
