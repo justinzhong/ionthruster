@@ -62,9 +62,12 @@
     <Compile Include="Config\ProjectConfig.cs" />
     <Compile Include="Infrastructure\IBuildAgent.cs" />
     <Compile Include="Infrastructure\INugetPackageFinder.cs" />
+    <Compile Include="Infrastructure\IPathDetector.cs" />
     <Compile Include="Infrastructure\IProcessRunner.cs" />
     <Compile Include="Infrastructure\MsBuildAgent.cs" />
     <Compile Include="Infrastructure\NugetPackageFinder.cs" />
+    <Compile Include="Infrastructure\PathDetector.cs" />
+    <Compile Include="Infrastructure\PathDetectorFactory.cs" />
     <Compile Include="Infrastructure\ProcessRunner.cs" />
     <Compile Include="BuildMiddleware.cs" />
     <Compile Include="Modules\AutofacBuildModule.cs" />

@@ -7,6 +7,7 @@ namespace Ionthruster.Middleware.Build.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => new PathDetectorFactory().Create()).As<IPathDetector>();
             builder.RegisterType<NugetPackageFinder>().As<INugetPackageFinder>();
             builder.RegisterType<ProcessRunner>().As<IProcessRunner>();
             builder.RegisterType<MsBuildAgent>().As<IBuildAgent>();
